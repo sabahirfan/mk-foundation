@@ -1,69 +1,171 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+import { ActionLink } from "@/components/site/action-link";
+import { CauseList } from "@/components/site/cause-list";
+import { WebSiteJsonLd } from "@/components/site/json-ld";
+import { MarginNote } from "@/components/site/margin-note";
+import { RedTick } from "@/components/site/red-tick";
+import { causes } from "@/content/causes";
+import { site } from "@/content/site";
+import { story } from "@/content/story";
+import { pageMetadata } from "@/lib/seo";
 
-export default function Home() {
+export const metadata: Metadata = pageMetadata({
+  title: site.seo.title,
+  description: site.seo.description,
+  path: "/",
+  absoluteTitle: true,
+});
+
+const steps = [
+  {
+    title: "You give in the UK",
+    body: "By bank transfer or PayPal, in pounds. Add a reference to choose the cause your gift goes to.",
+  },
+  {
+    title: "We send it to Pakistan",
+    body: "Funds go to the families, schools and doctors we work with, through people we know and trust on the ground.",
+  },
+  {
+    title: "We show you where it went",
+    body: "We publish what we spent, on what, and where, so you can see your gift at work.",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      <WebSiteJsonLd />
+      <section className="notebook hero-ruled ruled border-b border-rule">
+        <div className="page page-grid pt-14 pb-16 lg:pt-24 lg:pb-24">
+          <div className="margin-note-slot flex h-[calc(var(--rule-gap)*2)] items-start gap-3 lg:h-auto lg:flex-col lg:items-end lg:pt-3">
+            <RedTick className="w-12 shrink-0 lg:w-16" />
+            <p
+              className="hand redpen-fade -rotate-2 text-lg leading-snug text-redpen lg:text-right"
+              style={{ "--delay": "900ms" } as React.CSSProperties}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              in memory of{" "}Sir
+              <br />
+              Mubashir{" "}Kaleem
+            </p>
+          </div>
+          <div className="max-w-[46rem]">
+            <h1 className="hero-title font-semibold tracking-tight">{site.tagline}</h1>
+            <p className="hero-lede mt-[var(--rule-gap)] max-w-[38rem] text-ink-soft">
+              We feed hungry families, care for orphans, and help children stay in school and in good health,
+              in memory of {site.memorialOf}, a school teacher from Pakistan.
+            </p>
+            <div className="mt-[var(--rule-gap)] flex flex-wrap items-center gap-x-6 gap-y-3">
+              <ActionLink href="/donate/" className="px-7 text-lg">
+                Donate
+              </ActionLink>
+              <ActionLink href="/about/" variant="quiet" className="text-lg">
+                Read his story
+              </ActionLink>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section id="our-work" aria-labelledby="our-work-title" className="notebook">
+        <div className="page page-grid py-16 lg:py-24">
+          <MarginNote>what we do</MarginNote>
+          <div>
+            <h2 id="our-work-title" className="max-w-2xl text-3xl leading-tight font-semibold md:text-4xl">
+              Four ways your gift helps a child in Pakistan
+            </h2>
+            <p className="mt-4 max-w-2xl text-ink-soft">
+              Choose one, or give where the need is greatest. Each cause has its own payment reference so your gift is
+              spent the way you intended.
+            </p>
+            <div className="mt-10">
+              <CauseList causes={causes} />
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section aria-labelledby="memory-title" className="on-board bg-board text-chalk">
+        <div className="page page-grid py-16 lg:py-24">
+          <MarginNote tone="chalk">in loving memory</MarginNote>
+          <div className="grid items-start gap-10 md:grid-cols-[minmax(0,1fr)_auto]">
+            <div className="max-w-[38rem]">
+              <h2 id="memory-title" className="text-3xl leading-tight font-semibold md:text-4xl">
+                {site.memorialOf}
+              </h2>
+              <p className="mt-2 text-chalk-soft">School teacher. Died 2022, buried in London.</p>
+              <div className="mt-8 space-y-5 text-lg">
+                {story.short.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+              <ActionLink
+                href="/about/"
+                variant="quiet"
+                className="mt-6 text-lg text-chalk decoration-chalk-soft hover:decoration-chalk-red"
+              >
+                Read his story
+              </ActionLink>
+            </div>
+            {story.portrait && (
+              <Image
+                src={story.portrait.src}
+                alt={story.portrait.alt}
+                width={story.portrait.width}
+                height={story.portrait.height}
+                className="w-56 -rotate-2 border-8 border-chalk shadow-lg md:w-64"
+              />
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="how-title" className="notebook">
+        <div className="page page-grid py-16 lg:py-24">
+          <MarginNote>how it works</MarginNote>
+          <div>
+            <h2 id="how-title" className="max-w-2xl text-3xl leading-tight font-semibold md:text-4xl">
+              How your gift reaches Pakistan
+            </h2>
+            <ol className="mt-10 grid gap-10 md:grid-cols-3 md:gap-8">
+              {steps.map((step, index) => (
+                <li key={step.title} className="border-t-2 border-ink pt-5">
+                  <p className="hand text-3xl leading-none text-redpen" aria-hidden>
+                    {index + 1}.
+                  </p>
+                  <h3 className="mt-3 text-xl font-semibold">{step.title}</h3>
+                  <p className="mt-2 text-ink-soft">{step.body}</p>
+                </li>
+              ))}
+            </ol>
+            <ActionLink href="/transparency/" variant="quiet" className="mt-8">
+              See where the money goes
+            </ActionLink>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="give-title" className="notebook ruled border-t border-rule">
+        <div className="page page-grid py-16 lg:py-24">
+          <MarginNote>thank you</MarginNote>
+          <div className="max-w-[40rem]">
+            <h2 id="give-title" className="text-3xl leading-tight font-semibold md:text-4xl">
+              Give in his name
+            </h2>
+            <p className="mt-4 text-lg text-ink-soft">
+              One-off or monthly, by bank transfer or PayPal. Your gift goes to the cause you choose.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <ActionLink href="/donate/" className="px-7 text-lg">
+                Donate
+              </ActionLink>
+              <ActionLink href="/causes/" variant="quiet" className="text-lg">
+                Choose a cause
+              </ActionLink>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
