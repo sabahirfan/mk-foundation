@@ -33,9 +33,8 @@ export const site = {
       "In memory of a Pakistani school teacher, we feed hungry families, support orphans and keep children in school and healthy in Pakistan. Give from the UK.",
   },
 
-  // TODO: set to the purchased domain, e.g. "https://www.mkfoundation.org".
-  // NEXT_PUBLIC_SITE_URL overrides this at build time.
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://mk-foundation.example",
+  // The live domain. NEXT_PUBLIC_SITE_URL overrides it at build time.
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://mubashirkaleem.foundation",
 
   registration: { kind: "in-progress" } as RegistrationStatus,
 

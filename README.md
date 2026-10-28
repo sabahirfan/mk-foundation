@@ -38,7 +38,7 @@ The footer, Donate page and donation policy update automatically.
 
 ## Before launch
 
-- [ ] Set the domain: the `SITE_URL` repository variable (see below) and the fallback `url` in `content/site.ts`. Canonical links and the sitemap use it.
+- [x] Set the domain (`https://mubashirkaleem.foundation`): the `SITE_URL` repository variable and the fallback `url` in `content/site.ts`. Canonical links and the sitemap use it.
 - [ ] Add the foundation's email and WhatsApp number in `content/site.ts`
 - [ ] Add the bank account details in `content/site.ts` (a dedicated account in the foundation's name)
 - [ ] Add the PayPal donate link in `content/site.ts`
@@ -75,13 +75,14 @@ One-time setup:
 1. Push this repository to GitHub.
 2. In the repository settings, under **Pages**, set **Source** to **GitHub Actions**.
 3. Under **Settings → Secrets and variables → Actions → Variables**, add `SITE_URL` with the full
-   domain, e.g. `https://www.mkfoundation.org`.
+   domain: `https://mubashirkaleem.foundation`.
 4. Under **Pages → Custom domain**, enter the domain and save. (A `CNAME` file isn't needed when
    deploying with Actions.)
 5. At the domain registrar, add these DNS records:
    - `A` records for the apex domain: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - `AAAA` records for the apex domain: `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`
-   - `CNAME` record for `www` pointing to `<your-github-username>.github.io`
+   - `CNAME` record for `www` pointing to `sabahirfan.github.io`
+   - Leave the `MX` and `TXT` (`v=spf1…`) records alone: they run the foundation's IONOS email.
 6. Verify the domain in your GitHub account or organisation settings under **Pages**. This stops
    anyone else from using it.
 7. Once the certificate is issued, tick **Enforce HTTPS**.
